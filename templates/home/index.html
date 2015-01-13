@@ -1,0 +1,26 @@
+<h1> Sid__ </h1>
+
+<div>
+  <strong> The Daily</strong>
+  <p> I work as an Engineer at <a href="<%= currently.company_url %>" target="_blank">
+    <%= currently.company %></a> </p>
+</div>
+
+<div>
+  <strong> I do a little bit of </strong>
+  <ul>
+    <% for(var i=0; i < currently.doing.length; i++) {%>
+      <li> <%= currently.doing[i] %></li>
+    <% } %>
+
+  </ul>
+</div>
+
+<div>
+  <strong>Breadcrumbs</strong>
+  <ul>
+    <li><a href="<%= blog %>">Blog </a> - I write a little here</li>
+    <li><a href="<%= twitter_url %>"><%= twitter_handle %></a> - A live stream of my thoughts.</li>
+    <li><a href="<%= linkedin_url %>"><%= linkedin_url %></a> - Linkedin</li>
+  </ul>
+</div>
