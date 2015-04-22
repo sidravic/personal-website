@@ -12,10 +12,12 @@ if (typeof(PhusionPassenger) != 'undefined') {
 //{ debug: { request: ['error', 'received'] } }
 if (typeof(PhusionPassenger) != 'undefined') {
 	// Requires Phusion Passenger >= 4.0.52!
-	server = new Hapi.Server('/passenger');
+	server = new Hapi.Server();
+	server.connection({port: '/passenger'})
 } else {
 	server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
 							  request: ['error', 'received']}});
+	server.connection({port: 8000});
 }
 
 //var server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
@@ -24,7 +26,7 @@ if (typeof(PhusionPassenger) != 'undefined') {
 if (process.env.ENVIRONMENT == undefined)
 	process.env.ENVIRONMENT = "development";
 
-server.connection({port: 8000});
+//server.connection({port: 8000});
 server.connection({ routes: { state: { parse: true } } });
 
 server.state('session', {
