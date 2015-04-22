@@ -45,7 +45,9 @@ client.exists('lastViewedAt', function(err, existsStatus){
 });
 
 client.exists('lastViewedIp', function(err, existsStatus){
-
+     if(existsStatus == 0){
+         client.set('lastViewedIp', '');
+     }
 })
 
 
