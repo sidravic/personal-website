@@ -12,7 +12,8 @@ module.exports.index = {
 		var cookieKey = StatsService.generateCookieForHour();
 
 		StatsService.cookieExists(request.state, cookieKey,
-			                      request.info.remoteAddress,
+			                      request.headers['x-real-ip' +
+								  ''],
 			                     StatsService.incrementViews);
 
 		util.inspect(request.state);

@@ -101,8 +101,7 @@ var viewsCounterService = {
     },
 
     updateLastViewedIp: function(requestIp){
-        var lastViewedIp = requestIp;
-        redis.set('updateLastViewedIp', lastViewedIp, function(err, setStatus){
+        redis.set('lastViewedIp', requestIp, function(err, setStatus){
             if(err) throw err;
             return setStatus;
         })
