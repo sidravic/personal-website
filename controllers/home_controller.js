@@ -10,10 +10,9 @@ module.exports.index = {
 	handler: function(request, response){
 		request.log(['params'], helpers.applicationHelper.urlAndBodyParams(request));
 		var cookieKey = StatsService.generateCookieForHour();
-
+		var requestIp = request.headers['x-real-ip'] || request.headers['x-forwarded-for'] || request.info.remoteAddress;
 		StatsService.cookieExists(request.state, cookieKey,
-			                      request.headers['x-real-ip' +
-								  ''],
+			                      requestIp,
 			                     StatsService.incrementViews);
 
 		util.inspect(request.state);

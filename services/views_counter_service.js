@@ -110,6 +110,7 @@ var viewsCounterService = {
     updateViewedIps: function(requestIp){
         //viewedIps.push(requestIp);
         //viewedIps = _.uniq(viewedIps);
+
         redis.sadd('viewedIps', requestIp, function(err, addStatus){
            if (err) throw err;
             return addStatus;
