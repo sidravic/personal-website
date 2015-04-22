@@ -7,8 +7,16 @@ var Website = require('./config');
 var util = require('util');
 
 //{ debug: { request: ['error', 'received'] } }
-var server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
+if (typeof(PhusionPassenger) != 'undefined') {
+	// Requires Phusion Passenger >= 4.0.52!
+	server = new Hapi.Server('/passenger');
+} else {
+	server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
 							  request: ['error', 'received']}});
+}
+
+//var server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
+//							  request: ['error', 'received']}});
 
 if (process.env.ENVIRONMENT == undefined)
 	process.env.ENVIRONMENT = "development";
