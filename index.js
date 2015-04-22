@@ -6,6 +6,9 @@ var Basic = require('hapi-auth-basic');
 var Website = require('./config');
 var util = require('util');
 
+if (typeof(PhusionPassenger) != 'undefined') {
+	PhusionPassenger.configure({ autoInstall: false });
+}
 //{ debug: { request: ['error', 'received'] } }
 if (typeof(PhusionPassenger) != 'undefined') {
 	// Requires Phusion Passenger >= 4.0.52!
