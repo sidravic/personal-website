@@ -45,15 +45,8 @@ client.exists('lastViewedAt', function(err, existsStatus){
 });
 
 client.exists('lastViewedIp', function(err, existsStatus){
-    if(existsStatus == 0){
-        client.set('lastViewedIp', '127.0.0.1');
-    }
+
 })
 
-client.exists('lastViewedIp', function(err, existsStatus){
-    if(existsStatus == 0){
-        client.set('lastViewedIp', '127.0.0.1');
-    }
-})
 
 
