@@ -1,5 +1,6 @@
 var async = require('async')
 var viewCounterService = require('./../services/views_counter_service.js');
+var statsService = require('./../services/stats_service.js');
 
 module.exports.index = {
     description: 'Displays Stats',
@@ -25,17 +26,25 @@ module.exports.index = {
                 viewCounterService.getViewedIps(function(err, _viewedIps){
                     callback(err, _viewedIps);
                 })
+            },
+            viewsForToday: function(callback){
+                viewCounterService.getCountForViewsToday(statsService.generateCookieForDay(), function(err, _viewsForToday){
+                    callback(err, _viewsForToday);
+                })
             }
         }, function(err, results){
             var totalViews = results.totalViews;
             var lastViewedIp = results.lastViewedIp;
             var lastViewedAt = results.lastViewedAt;
             var viewedIps = results.viewedIps;
+            var viewsForToday = results.viewsForToday;
+
             reply.view('stats/index', {title: 'Stats',
                 totalViews: totalViews,
                 lastViewedIp: lastViewedIp,
                 lastViewedAt: lastViewedAt,
-                viewedIps: viewedIps
+                viewedIps: viewedIps,
+                viewsForToday: viewsForToday
             })
         })
 

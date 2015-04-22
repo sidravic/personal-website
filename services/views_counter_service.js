@@ -5,6 +5,7 @@ var totalViews = 0;
 var lastViewedAt = null;
 var lastViewedIp = null;
 var viewedIps = [];
+var viewedToday = 0;
 
 redis.get('totalViews', function(err, value){
     totalViews = value;
@@ -23,10 +24,6 @@ redis.get('lastViewedIp', function(err, _lastViewedIp){
 })
 
 
-
-
-
-
 var viewsCounterService = {
     increment: function(){
         //totalViews += 1;
@@ -34,6 +31,22 @@ var viewsCounterService = {
             if(err){
                 throw err;
             }
+        })
+    },
+
+    incrementCountForDay: function(keyForToday){
+        var self = this;
+        redis.incr(keyForToday, function(err, incrStatus){
+            if(err) throw err;
+            self.updateExpiryForKey(keyForToday);
+        })
+    },
+
+    getCountForViewsToday: function(keyForToday, cb){
+        redis.get(keyForToday, function(err, _viewsForToday){
+            if(err) cb(err, null);
+
+            cb(null, _viewsForToday);
         })
     },
 
@@ -102,6 +115,14 @@ var viewsCounterService = {
            if (err) throw err;
             return addStatus;
         });
+    },
+
+    updateExpiryForKey: function(key){
+        var timeInSeconds = 24 * 60 * 60;
+        redis.expire(key, timeInSeconds, function(err, expireStatus){
+            if (err) throw err;
+
+        })
     }
 
 

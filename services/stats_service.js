@@ -15,6 +15,15 @@ var StatsService = {
         }
     },
 
+    generateCookieForDay: function(){
+        var date = new Date();
+        var cookieKey = StatsService.cookieBaseKey().toString() +
+            "_" + date.getDate().toString() + "_" + date.getMonth().toString() +
+            "_"  + date.getFullYear().toString();
+
+        return cookieKey;
+    },
+
     generateCookieForHour: function(){
         var date = new Date();
         var cookieKey = StatsService.cookieBaseKey().toString() +
@@ -28,6 +37,7 @@ var StatsService = {
     incrementViews: function(shouldIncrement, cookieKey, remoteAddress){
         if (shouldIncrement) {
             viewsCounterService.increment();
+            viewsCounterService.incrementCountForDay(StatsService.generateCookieForDay());;
             viewsCounterService.updateLastViewedAt();
             viewsCounterService.updateLastViewedIp(remoteAddress);
             viewsCounterService.updateViewedIps(remoteAddress)
