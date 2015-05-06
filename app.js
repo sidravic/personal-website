@@ -17,7 +17,7 @@ if (typeof(PhusionPassenger) != 'undefined') {
 } else {
 	server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
 							  request: ['error', 'received']}});
-	server.connection({port: 8000});
+	server.connection({port: 8081});
 }
 
 //var server = new Hapi.Server({debug: {log: ['request', 'error', 'debug'],
