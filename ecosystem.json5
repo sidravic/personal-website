@@ -43,7 +43,7 @@
       user : "sid",
       host : "siddharthravichandran.com",
       ref  : "origin/websocket_emulation",
-      repo : "git@github.com:repo.git",
+      repo : "git@github.com:supersid/personal-website.git",
       path : "/srv/apps/pm2-deploy",
       "post-deploy" : "pm2 startOrRestart ecosystem.json5 --env production"
     }
