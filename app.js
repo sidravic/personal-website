@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt')
 var Basic = require('hapi-auth-basic');
 var Website = require('./config');
 var util = require('util');
+var websocketServer = require('./websocket_server');
 
 if (typeof(PhusionPassenger) != 'undefined') {
 	PhusionPassenger.configure({ autoInstall: false });
@@ -98,4 +99,5 @@ server.views({
 
 server.start(function(){
 	console.log("Server running...")
+	websocketServer.installHandlers(server.listener, {prefix: '/echo'})
 })

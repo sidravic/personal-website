@@ -11,9 +11,41 @@
             <small>
                 <a href="/stats">Stats</a> powered by Hapi.js, Node.js and Redis.
             </small>
+            <br/>
+            <small>
+                Number of viewers on site: <span id="viewers-on-site"><%= viewers %></span>
+            </small>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+        <script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
         <script type="application/javascript" src="/static/javascripts/stats.js"></script>
+
+        <script type='application/javascript'>
+            $(document).ready(function(){
+                var sockjs;
+
+                try{
+                    var sockjs_url = '/echo';
+                    sockjs = new SockJS(sockjs_url);
+
+                    sockjs.onopen = function(){
+                    }
+
+                    sockjs.onmessage = function(e){
+                        if($('#viewers-on-site').length > 0 && (e.data != undefined))
+                            var messageObject = JSON.parse(e.data);
+                        $('#viewers-on-site').html(messageObject.membersCount);
+                    }
+
+                    sockjs.onclose = function(){
+                    }
+                }catch(e){
+
+                }
+
+            })
+
+        </script>
     </body>
 </html>

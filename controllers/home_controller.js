@@ -16,7 +16,8 @@ module.exports.index = {
 			                     StatsService.incrementViews);
 
 		util.inspect(request.state);
-		response.view('home/index', {'currently': {company: 'Idyllic',
+		response.view('home/index', {'viewers':0 ,
+									 'currently': {company: 'Idyllic',
 				                                   company_url: 'http://idyllic-software.com',
 				                                   doing: ['Ruby', 'Node']},
 				                                   'blog': 'http://siddharth-ravichandran.com',
